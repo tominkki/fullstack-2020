@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
-import AddPerson from './components/add-person'
-import FilterPeople from './components/filter-people'
-import Numbers from './components/numbers'
+import axios from 'axios';
+import AddPerson from './components/add-person';
+import FilterPeople from './components/filter-people';
+import Numbers from './components/numbers';
+
 
 const App = () =>{
   const [persons, setPersons] = useState([
@@ -12,6 +14,13 @@ const App = () =>{
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setNewFilter] = useState('')
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/persons')
+    .then(response =>{
+      setPersons(response.data);
+    })
+  })
 
   const handleNameChange = (event) =>{
     setNewName(event.target.value)
