@@ -9,7 +9,7 @@ const Countries = ({countries, show}) => {
         );
     }
 
-    else if (countries.length == 0) {
+    else if (countries.length === 0) {
         return(
             <p>No countries found with filter.</p>
         );
@@ -21,7 +21,7 @@ const Countries = ({countries, show}) => {
             <table>
                 <tbody>
                     {countries.map((country) =>
-                    <tr>
+                    <tr key={country.name}>
                         <td>{country.name}</td>
                         <td><button onClick={() => show(country.name)}>show</button></td>
                     </tr>
@@ -32,7 +32,7 @@ const Countries = ({countries, show}) => {
         );
     }
 
-    else if (countries.length == 1) {
+    else if (countries.length === 1) {
         return(
             <>
             <Country country = {countries[0]}/>
