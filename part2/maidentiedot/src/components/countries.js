@@ -1,7 +1,7 @@
 import React from 'react';
 import Country from './country.js';
 
-const Countries = ({countries}) => {
+const Countries = ({countries, show}) => {
 
     if (countries.length > 10) {
         return(
@@ -21,7 +21,10 @@ const Countries = ({countries}) => {
             <table>
                 <tbody>
                     {countries.map((country) =>
-                    <tr><td>{country.name}</td></tr>
+                    <tr>
+                        <td>{country.name}</td>
+                        <td><button onClick={() => show(country.name)}>show</button></td>
+                    </tr>
                     )}
                 </tbody>
             </table>

@@ -21,7 +21,7 @@ const App = () => {
   }, [setCountries])
 
   function filterCountries (filter, countries) {
-    let countriesToShow = countries.filter(country => {
+    const countriesToShow = countries.filter(country => {
       if(country.name.toLowerCase().includes(filter.toLowerCase())) {
         return country;
       }
@@ -36,7 +36,7 @@ const App = () => {
       filter = {filter}
       handleFilterChange = {handleFilterChange}></FilterCountries>
 
-      <Countries countries = {filterCountries(filter, countries)}></Countries>
+      <Countries countries={filterCountries(filter, countries)} show={setNewFilter}></Countries>
     </div>
   )
 }
