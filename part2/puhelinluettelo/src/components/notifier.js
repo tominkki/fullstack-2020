@@ -13,11 +13,11 @@ const Notification = ({msg, error}) => {
 
     else {
         return (
-        <div className='success'>
-            <p>{msg}</p>
-        </div>
-    );
-}
-}
+            <div className='success'>
+                <p>{msg}</p>
+            </div>
+        );
+    }
+};
 
 export default Notification;
