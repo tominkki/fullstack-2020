@@ -11,3 +11,4 @@
 ### part2
 - kurssitiedot
 - puhelinluettelo
+- maiden tiedot
