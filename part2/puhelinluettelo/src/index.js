@@ -7,9 +7,7 @@ import Numbers from './components/numbers';
 
 
 const App = () =>{
-  const [persons, setPersons] = useState([
-    {name: 'Arto Hellas', number: '040-1231244'}
-  ])
+  const [persons, setPersons] = useState([])
 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
@@ -20,7 +18,7 @@ const App = () =>{
     .then(response =>{
       setPersons(response.data);
     })
-  })
+  }, [])
 
   const handleNameChange = (event) =>{
     setNewName(event.target.value)
@@ -35,11 +33,8 @@ const App = () =>{
   } 
   
   const peopleToShow = filter === '' ? 
-  persons : persons.filter(person => {
-    if(person.name.toLowerCase().includes(filter.toLowerCase())){
-      return person
-    }
-  })
+  persons : persons.filter(person => 
+    (person.name.toLowerCase().includes(filter.toLowerCase())))
     
 
   const addPerson = (event) =>{
@@ -49,11 +44,13 @@ const App = () =>{
 
     if(names.includes(newName.toLowerCase())){
       window.alert(`${newName} is already added to phonebook!`)
-      setNewName('')
+      setNewName('');
+      setNewNumber('');
     }
 
     else if(numbers.includes(newNumber)){
       window.alert(`${newNumber} is already added to phonebook!`)
+      setNewName('');
       setNewNumber('')
     }
 
@@ -65,6 +62,11 @@ const App = () =>{
       setPersons(persons.concat(newPerson))
       setNewName('')
       setNewNumber('')
+
+      axios.post('http://localhost:3001/persons', newPerson)
+      .then(response => {
+        console.log(response);
+      })
     }
   }
   
