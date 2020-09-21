@@ -18,6 +18,9 @@ const App = () =>{
     .then(initialContacts => {
       setPersons(initialContacts);
     })
+    .catch(error => {
+      window.alert(`Failed to fetch phonebook. ${error}`);
+    })
   }, [])
 
   const handleNameChange = (event) =>{
@@ -57,7 +60,8 @@ const App = () =>{
     else if(newName !== '' && newNumber !== ''){
         const newPerson = {
         name: newName,
-        number: newNumber
+        number: newNumber,
+        id: persons[persons.length - 1].id + 1
       }
       
       Phonebook.postNew(newPerson)
@@ -66,7 +70,30 @@ const App = () =>{
         setNewName('');
         setNewNumber('');
       })
+      .catch(error => {
+        window.alert(`Could not add person to database. ${error}`);
+      })
     }
+  }
+
+  const deletePerson = (person) => {
+
+    if(!window.confirm(`Delete ${person.name}?`)){return;}
+
+    Phonebook.deletePerson(person.id)
+    .then(returnData => {
+      console.log(returnData);
+
+      const updatedPersons = persons.filter(p => (
+        p.id !== person.id
+      ));
+
+      setPersons(updatedPersons);
+    })
+
+    .catch(error => {
+      window.alert(`Could not delete ${person.name}. ${error}`);
+    })
   }
   
   return(
@@ -84,7 +111,9 @@ const App = () =>{
     filter = {filter}
     handleFilterChange = {handleFilterChange}/>
 
-    <Numbers people = {peopleToShow}/>
+    <Numbers 
+    people = {peopleToShow}
+    deletePerson = {deletePerson}/>
     </div>
   )
 }

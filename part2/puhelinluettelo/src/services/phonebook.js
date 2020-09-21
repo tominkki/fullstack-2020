@@ -12,4 +12,9 @@ const postNew = newObject => {
     return request.then(response => response.data);
 }
 
-export default {getAll, postNew};
+const deletePerson = id => {
+    const request = axios.delete(`${db_url}/${id}`);
+    return request.then(response => response.data);
+}
+
+export default {getAll, postNew, deletePerson};
