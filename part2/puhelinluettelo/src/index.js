@@ -46,9 +46,27 @@ const App = () =>{
     const numbers = persons.map(person => (person.number))
 
     if(names.includes(newName.toLowerCase())){
-      window.alert(`${newName} is already added to phonebook!`)
-      setNewName('');
-      setNewNumber('');
+
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number?`)) {
+        const newPerson = {
+          name: newName,
+          number: newNumber,
+          id: persons.find(p => p.name.toLowerCase() === newName.toLocaleLowerCase()).id
+        }
+        
+        Phonebook.updateContact(newPerson)
+        .then(returnedPerson => {
+            Phonebook.getAll()
+            .then(initialContacts => {
+              setPersons(initialContacts);
+            })
+        })
+      }
+
+      else{
+        setNewName('');
+        setNewNumber('');
+      }
     }
 
     else if(numbers.includes(newNumber)){

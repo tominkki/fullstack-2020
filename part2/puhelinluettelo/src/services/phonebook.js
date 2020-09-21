@@ -17,4 +17,9 @@ const deletePerson = id => {
     return request.then(response => response.data);
 }
 
-export default {getAll, postNew, deletePerson};
+const updateContact = newObj => {
+    const request = axios.put(`${db_url}/${newObj.id}`, newObj);
+    return request.then(response => response.data);
+}
+
+export default {getAll, postNew, deletePerson, updateContact};
