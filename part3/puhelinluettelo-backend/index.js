@@ -44,7 +44,26 @@ app.get('/api/persons', (req, res) => {
 
 app.post('/api/persons', (req, res) => {
 
+    if(!req.body.name) {
+        return res.status(400).json({
+            error: 'name missing'
+        });
+    }
+
+    if(!req.body.number) {
+        return res.status(400).json({
+            error: 'number missing'
+        });
+    }
+
+    if(persons.find(p => p.name === req.body.name)) {
+        return res.status(400).json({
+            error: 'name must be unique'
+        });
+    }
+
     const person = req.body;
+
     person.id = persons.length > 0 
         ? Math.max(...persons.map(p => p.id)) + 1 
         : 1;
@@ -59,7 +78,9 @@ app.get('/api/persons/:id', (req, res) => {
     const id = Number(req.params.id);
     const person = persons.find(person => person.id === id);
 
-    person ? res.json(person) : res.status(404).end();
+    if(!person) {return res.status(404).end();}
+    
+    res.json(person);
 });
 
 app.delete('/api/persons/:id', (req, res) => {
