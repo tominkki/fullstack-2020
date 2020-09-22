@@ -38,7 +38,20 @@ app.get('/info', (req, res) => {
 });
 
 app.get('/api/persons', (req, res) => {
+
     res.json(persons);
+});
+
+app.post('/api/persons', (req, res) => {
+
+    const person = req.body;
+    person.id = persons.length > 0 
+        ? Math.max(...persons.map(p => p.id)) + 1 
+        : 1;
+
+    persons = persons.concat(person);
+
+    res.json(person);
 });
 
 app.get('/api/persons/:id', (req, res) => {
@@ -52,7 +65,7 @@ app.get('/api/persons/:id', (req, res) => {
 app.delete('/api/persons/:id', (req, res) => {
     const id = Number(req.params.id);
     persons = persons.filter(p => p.id !== id);
-    
+
     res.status(204).end();
 });
 
