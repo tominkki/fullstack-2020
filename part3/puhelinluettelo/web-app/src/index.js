@@ -57,8 +57,7 @@ const App = () =>{
             if(window.confirm(`${newName} is already added to phonebook, replace the old number?`)) {
                 const newPerson = {
                     name: newName,
-                    number: newNumber,
-                    id: persons.find(p => p.name.toLowerCase() === newName.toLocaleLowerCase()).id
+                    number: newNumber
                 };
         
                 Phonebook.updateContact(newPerson)
@@ -87,16 +86,15 @@ const App = () =>{
         else if(newName !== '' && newNumber !== ''){
             const newPerson = {
                 name: newName,
-                number: newNumber,
-                id: persons[persons.length - 1].id + 1
+                number: newNumber
             };
         
             Phonebook.postNew(newPerson)
-                .then(returnedPerson => {
-                    setPersons(persons.concat(newPerson));
+                .then(res => {
+                    setPersons(persons.concat(res));
                     setNewName('');
                     setNewNumber('');
-                    notification(`Added ${newPerson.name}`, false);
+                    notification(`Added ${res.name}`, false);
                 })
                 .catch(error => {
                     notification(`Could not add person to database. ${error}`, true);

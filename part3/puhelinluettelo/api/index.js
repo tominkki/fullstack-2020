@@ -28,7 +28,6 @@ app.get('/info', (req, res) => {
 
 app.get('/api/persons', (req, res) => {
     Person.find({}).then(persons => {
-        console.log(persons);
         res.json(persons);
     });
 });
