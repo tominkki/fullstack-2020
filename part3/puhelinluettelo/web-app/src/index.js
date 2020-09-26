@@ -49,22 +49,21 @@ const App = () =>{
 
     const addPerson = (event) =>{
         event.preventDefault();
-        const names = persons.map(person => (person.name.toLowerCase()));
-        const numbers = persons.map(person => (person.number));
 
-        if(names.includes(newName.toLowerCase())){
+        const foundPerson = persons.filter(p => p.name === newName);
 
+        if(foundPerson.length !== 0){
             if(window.confirm(`${newName} is already added to phonebook, replace the old number?`)) {
                 const newPerson = {
+                    id: foundPerson[0].id,
                     name: newName,
                     number: newNumber
                 };
-        
                 Phonebook.updateContact(newPerson)
                     .then(returnedPerson => {
                         Phonebook.getAll()
-                            .then(initialContacts => {
-                                setPersons(initialContacts);
+                            .then(contacts => {
+                                setPersons(contacts);
                             });
                         notification(`Updated ${newPerson.name}`, false);
                     })
@@ -72,14 +71,13 @@ const App = () =>{
                         notification(`Could not update contact. ${error}`, true);
                     });
             }
-
             else{
                 setNewName('');
                 setNewNumber('');
             }
         }
 
-        else if(numbers.includes(newNumber)){
+        else if(persons.filter(person => (person.number === newNumber)).length !== 0){
             notification(`${newNumber} is already added to phonebook!`, true);
         }
 
