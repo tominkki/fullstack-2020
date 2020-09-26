@@ -19,12 +19,14 @@ let persons = [];
 app.get('/info', (req, res) => {
     
     let date = new Date();
-    let count = persons.length;
-
-    res.send(
-        `<p>Phonebook has info for ${count} people</p>
+    
+    Person.find({}).then(persons => {
+        res.send(
+        `<p>Phonebook has info for ${persons.length} people.</p>
         <p>${date}</p>`
-    );
+        );
+    })
+    .catch(err => next(err));
 });
 
 app.get('/api/persons', (req, res, next) => {
@@ -35,25 +37,6 @@ app.get('/api/persons', (req, res, next) => {
 });
 
 app.post('/api/persons', (req, res, next) => {
-
-    if(!req.body.name) {
-        return res.status(400).json({
-            error: 'name missing'
-        });
-    }
-
-    if(!req.body.number) {
-        return res.status(400).json({
-            error: 'number missing'
-        });
-    }
-
-    if(persons.find(p => p.name === req.body.name)) {
-        return res.status(400).json({
-            error: 'name must be unique'
-        });
-    }
-
     const person = new Person({
         name: req.body.name,
         number: req.body.number
