@@ -14,8 +14,6 @@ app.use(express.static('build'));
 app.use(express.json());
 app.use(morgan(':method :url :response-time :req'));
 
-let persons = [];
-
 app.get('/info', (req, res) => {
     
     let date = new Date();
@@ -84,6 +82,9 @@ const errorHandler = (err, req, res, next) => {
     console.error(err.message);
     if (err.name === 'CastError') {
       return res.status(400).send({ error: 'malformatted id' });
+    }
+    else if(err.name === 'ValidationError') {
+        return res.status(400).json({error: err.message});
     }
     next(err);
 }
