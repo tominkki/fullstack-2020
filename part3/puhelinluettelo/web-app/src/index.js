@@ -94,8 +94,8 @@ const App = () =>{
                     setNewNumber('');
                     notification(`Added ${res.name}`, false);
                 })
-                .catch(error => {
-                    notification(`Could not add person to database. ${error}`, true);
+                .catch(err => {
+                    notification(err.response.data.error, true);
                 });
         }
     };
