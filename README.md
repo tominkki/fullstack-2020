@@ -12,3 +12,6 @@
 - kurssitiedot
 - puhelinluettelo
 - maiden tiedot
+### part3
+- puhelinluettelo
+- puhelinluettelo-backend
