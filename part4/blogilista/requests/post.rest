@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "oli ko hyvää",
+  "author": "Pizzeria ja pub Teheran",
+  "url": "google.com",
+  "likes": 69        
+}
