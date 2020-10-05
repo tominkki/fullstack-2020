@@ -1,6 +1,7 @@
-const favoriteBlog = require('../utils/list_helper').favoriteBlog;
+const mostBlogs = require('../utils/list_helper').mostBlogs;
 
-describe('most likes', () => {
+
+describe('most blogs', () => {
   const blogs = [
     {
       title:"maistuis varmaan sullekki",
@@ -22,30 +23,23 @@ describe('most likes', () => {
       url: "safk.at",
       likes: 1,
       id: "21093871249807"
+    },
+    {
+      title:"aamupala",
+      author:"Niilo22",
+      url:"google.com",
+      likes:222,
+      id:"5f79b923fc371a11b9f28ddf"
     }
   ];
 
-  test('empty list', () => {
-    const result = favoriteBlog([]);
-
-    expect(result).toEqual(
-      {
-
-      }
-    );
-  });
-
   test('list of blogs', () => {
-    const result = favoriteBlog(blogs);
+    const result = mostBlogs(blogs);
     expect(result).toEqual(
       {
-        title:"maistuis varmaan sullekki",
-        author:"Niilo22",
-        url:"google.com",
-        likes:222,
-        id:"5f79b923fc371a11b9f28ddf"
+        author: "Niilo22",
+        blogs: 2
       }
     );
   });
 });
-
