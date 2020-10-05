@@ -44,6 +44,34 @@ describe('api tests', () => {
 
   });
 
+  test('likes default value is zero', async() => {
+    await api.post('/api/blogs')
+      .send(
+        {
+          title: "Pizzakulma on nopee",
+          author: "webslave",
+          url: "pizzakulma.com"
+        }
+      )
+      .expect(201)
+      .expect('Content-Type', /application\/json/);
+
+    const res = await api.get('/api/blogs');
+    const likes = res.body.map(blogs => blogs.likes);
+
+    expect(likes[likes.length - 1]).toBe(0);
+  });
+
+  test('responds 400 if missing title and url', async() => {
+    await api.post('/api/blogs')
+      .send(
+        {
+          author: "meikämandariini",
+        }
+      )
+      .expect(400)
+  });
+
   afterAll(() => {
     mongoose.connection.close();
   });
