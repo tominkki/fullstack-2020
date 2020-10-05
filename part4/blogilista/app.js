@@ -8,17 +8,17 @@ const blogsRouter = require('./controllers/blogs');
 const app = express();
 
 mongoose.connect(config.DB_URL, { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
-    useFindAndModify: false, 
-    useCreateIndex: true 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true, 
+  useFindAndModify: false, 
+  useCreateIndex: true 
 })
-.then(() => {
+  .then(() => {
     logger.info('Connected to db.');
-})
-.catch(err => {
+  })
+  .catch(err => {
     logger.error('Could not connect to db: ', err.message);
-});
+  });
 
 app.use(cors());
 app.use(express.json());
