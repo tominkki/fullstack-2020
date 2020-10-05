@@ -72,6 +72,16 @@ describe('api tests', () => {
       .expect(400)
   });
 
+  test('deleting blogs by id', async() => {
+    const res = await api.get('/api/blogs');
+    const ids = res.body.map(blog => blog.id);
+
+    await api.delete(`/api/blogs/${ids[ids.length - 1]}`)
+      .expect(204);
+    await api.delete(`/api/blogs/${ids[ids.length - 2]}`)
+      .expect(204);
+  });    
+
   afterAll(() => {
     mongoose.connection.close();
   });
