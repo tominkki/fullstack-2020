@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
     "lint": "eslint --fix .",
-    "test": "jest --verbose"
+    "test": "NODE_ENV=test jest --verbose --runInBand"
   },
   "author": "",
   "license": "ISC",
@@ -19,7 +20,8 @@
   },
   "devDependencies": {
     "eslint": "^7.10.0",
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "supertest": "^5.0.0"
   },
   "jest": {
     "testEnvironment": "node"

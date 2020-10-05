@@ -2,8 +2,9 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "123",
-  "author": "234",
-  "url": "3214",
-  "likes": 69        
-}
+      "title":"oli ko hyvää",
+      "author":"Pizzeria ja pub Teheran",
+      "url":"google.com",
+      "likes":69,
+      "id":"5f79cea2fc371a11b9f28de0"
+    }
