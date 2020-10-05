@@ -72,6 +72,25 @@ describe('api tests', () => {
       .expect(400)
   });
 
+  test('updating blog', async() => {
+
+    const res = await api.get('/api/blogs');
+    const id = res.body.map(b => b.id)[3];
+
+    await api.put(`/api/blogs/${id}`)
+      .send(
+        {
+          title: "Pizzakulma on hidas",
+          author: "webslave",
+          url: "pizzakulma.com"
+        }
+      )
+      .expect(200);
+
+    const updated = await api.get(`/api/blogs/${id}`);
+    expect(updated.body.title).toBe('Pizzakulma on hidas');
+  });
+
   test('deleting blogs by id', async() => {
     const res = await api.get('/api/blogs');
     const ids = res.body.map(blog => blog.id);
