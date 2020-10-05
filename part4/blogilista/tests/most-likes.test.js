@@ -1,7 +1,7 @@
-const mostBlogs = require('../utils/list_helper').mostBlogs;
+const mostLikes = require('../utils/list_helper').mostLikes;
 
 
-describe('most blogs', () => {
+describe('most likes', () => {
   const blogs = [
     {
       title:"maistuis varmaan sullekki",
@@ -34,11 +34,11 @@ describe('most blogs', () => {
   ];
 
   test('list of blogs', () => {
-    const result = mostBlogs(blogs);
+    const result = mostLikes(blogs);
     expect(result).toEqual(
       {
         author: "Niilo22",
-        blogs: 2
+        likes: 569
       }
     );
   });

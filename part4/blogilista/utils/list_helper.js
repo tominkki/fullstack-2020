@@ -27,9 +27,24 @@ const mostBlogs = blogs => {
   });
 }
 
+const mostLikes = blogs => {
+  const result = collection.groupBy(blogs, 'author');
+  const keys = Object.keys(result);
+
+  const authors = keys.map(key => (
+    {
+      author: key,
+      likes: totalLikes(result[key])
+    } 
+  ));
+
+  return favoriteBlog(authors);
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 };
