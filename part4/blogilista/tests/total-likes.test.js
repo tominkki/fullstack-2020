@@ -1,5 +1,3 @@
-const { TestScheduler } = require('jest');
-
 const totalLikes = require('../utils/list_helper').totalLikes;
 
 describe('total likes', () => {
