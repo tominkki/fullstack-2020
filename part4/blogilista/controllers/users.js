@@ -3,6 +3,13 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users');
 
 usersRouter.post('/', async(req, res) => {
+
+  if(req.body.password.length < 3){
+    return res.status(400).json({
+      error: 'Password length has to be atleast 3 characters.'
+    });
+  }
+
   const pwHash = await bcrypt.hash(req.body.password, 10);
 
   const user = new User({
