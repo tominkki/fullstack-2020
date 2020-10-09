@@ -2,9 +2,9 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-      "title":"oli ko hyvää",
-      "author":"Pizzeria ja pub Teheran",
-      "url":"google.com",
-      "likes":69,
-      "id":"5f79cea2fc371a11b9f28de0"
-    }
+  "title":"oli ko hyvää?",
+  "author":"Pizzeria ja pub Teheran",
+  "url":"google.com",
+  "likes":69,
+  "user":"5f806b962dbb1934c5650571"
+}
