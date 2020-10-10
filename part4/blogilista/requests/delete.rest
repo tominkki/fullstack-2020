@@ -1,10 +1,7 @@
-POST http://localhost:3003/api/blogs
+DELETE http://localhost:3003/api/blogs/5f81a85c7d893076deb6e5cc
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5paWxvMjIiLCJpZCI6IjVmODA2Yjk2MmRiYjE5MzRjNTY1MDU3MSIsImlhdCI6MTYwMjMzMjczOH0.foX4uu4tfqsE2oIM55vDjSSCZoEVz_P59v-f3FooeOo
 
 {
-  "title":"213?",
-  "author":"213",
-  "url":"123.com",
-  "likes":321
 }
+
