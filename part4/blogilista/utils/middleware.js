@@ -4,7 +4,7 @@ const reqLogger = (req, res, next) => {
   logger.info(`Method: ${req.method}`);
   logger.info(`Path: ${req.path}`);
   logger.info(`Body: ${JSON.stringify(req.body)}`);
-  next()
+  next();
 };
 
 const tokenExtractor = (req, res, next) => {
@@ -24,17 +24,17 @@ const errorHandler = (err, req, res, next) => {
   logger.error(err.message);
 
   switch(err.name) {
-    case 'CastError':
-      return res.status(400).send({error: 'malformatted id'});
+  case 'CastError':
+    return res.status(400).send({error: 'malformatted id'});
       
-    case 'ValidationError':
-      return res.status(400).json({error: err.message});
+  case 'ValidationError':
+    return res.status(400).json({error: err.message});
 
-    case 'JsonWebTokenError':
-      return res.status(401).json({error: 'invalid token'});
+  case 'JsonWebTokenError':
+    return res.status(401).json({error: 'invalid token'});
 
-    default:
-      return next(err);
+  default:
+    next(err);
   }
 };
 

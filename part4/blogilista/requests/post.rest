@@ -1,10 +1,7 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5paWxvMjIiLCJpZCI6IjVmODA2Yjk2MmRiYjE5MzRjNTY1MDU3MSIsImlhdCI6MTYwMjMzMjczOH0.foX4uu4tfqsE2oIM55vDjSSCZoEVz_P59v-f3FooeOo
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5paWxvMjIiLCJpZCI6IjVmODA2Yjk2MmRiYjE5MzRjNTY1MDU3MSIsImlhdCI6MTYwMjQwODI5MH0.zLj8jYoRe3bzLqFnWZka-llZAhbp0GxcbVI-qPt2P3E
 
 {
-  "title":"213?",
-  "author":"213",
-  "url":"123.com",
-  "likes":321
+  "author":"213"
 }
