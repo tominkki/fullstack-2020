@@ -1,0 +1,19 @@
+.error {
+  color: firebrick;
+  background: gainsboro;
+  font-size:15px;
+  border-style: solid;
+  border-radius: 2px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: forestgreen;
+  background: gainsboro;
+  font-size:15px;
+  border-style: solid;
+  border-radius: 2px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
