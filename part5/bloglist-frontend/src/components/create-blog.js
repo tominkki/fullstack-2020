@@ -1,13 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const CreateBlog = ({
-  title, setTitle,
-  author, setAuthor,
-  url, setUrl,
-  createBlog
-}) => (
+const CreateBlog = ({addBlog}) => {
+  const [visibility, setVisibility] = useState(false);
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [url, setUrl] = useState('');
+
+  const show = {display: visibility ? 'none' : ''};
+  const hide = {display: visibility ? '' : 'none'};
+
+  const createBlog = (event) => {
+    event.preventDefault();
+    addBlog({
+      title: title,
+      author: author,
+      url: url
+    });
+    setTitle('');
+    setAuthor('');
+    setUrl('');
+  };
+  
+  return (
     <>
-    <form onSubmit={createBlog}>
+    <div style={show}><button onClick={() => setVisibility(true)}>create blog</button></div>
+    <form onSubmit={createBlog} style={hide}>
       <table>
         <tbody>
           <tr>
@@ -35,7 +52,8 @@ const CreateBlog = ({
       </table>
       <div><button type="submit">create</button></div>
     </form>
+    <div style={hide}><button onClick={() => setVisibility(false)}>cancel</button></div>
     </>
-);
-
+  );
+}
 export default CreateBlog;

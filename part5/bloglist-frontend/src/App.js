@@ -10,9 +10,6 @@ const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [url, setUrl] = useState('');
   const [user, setUser] = useState(null);
   const [msg, setMsg] = useState(null);
   const [error, setError] = useState();
@@ -53,23 +50,14 @@ const App = () => {
     notification('logged out')
   }
 
-  const createBlog = async (event) => {
-    event.preventDefault();
-    const newBlog = {
-      title: title,
-      author: author,
-      url: url
-    };
+  const addBlog = async (newBlog) => {
     try{
-      await blogService.create(newBlog);
-      notification(`${title} by ${author} created.`);
-      setBlogs(await blogService.getAll());
-      setTitle('');
-      setAuthor('');
-      setUrl('');
+      const res = await blogService.create(newBlog);
+      notification(`${res.title} by ${res.author} created.`);
+      setBlogs([...blogs, res]);
     }catch(err){
       notification(err.message, true);
-    }
+    };
   };
 
   const notification = (message, isError = false) => {
@@ -95,14 +83,10 @@ const App = () => {
         <div>
           <b>Logged in as {user.username}</b>
           <button onClick = {logout}>logout</button>
+          <CreateBlog addBlog={addBlog}/>
           {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
           )}
-          <CreateBlog createBlog={createBlog}
-            title={title} setTitle={setTitle}
-            author={author} setAuthor={setAuthor}
-            url={url} setUrl={setUrl} 
-          />
         </div>}
     </div>
   );
