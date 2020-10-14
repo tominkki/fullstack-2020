@@ -8,8 +8,6 @@ import loginService from './services/login-service';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
   const [msg, setMsg] = useState(null);
   const [error, setError] = useState();
@@ -29,26 +27,23 @@ const App = () => {
     }
   },[]);
 
-  const login = async(event) => {
-    event.preventDefault();
+  const login = async(credentials) => {
     try {
-      const user = await loginService.login({username, password});
+      const user = await loginService.login(credentials);
       window.localStorage.setItem('loggedUser', JSON.stringify(user));
       blogService.setToken(user.token);
       setUser(user);
-      setUsername('');
-      setPassword('');
     }catch (err) {
       notification('wrong username or password', true);
     }
-  } 
+  }; 
 
   const logout = () => {
     window.localStorage.removeItem('loggedUser');
     blogService.setToken('');
     setUser(null);
-    notification('logged out')
-  }
+    notification('logged out');
+  };
 
   const addBlog = async (newBlog) => {
     try{
@@ -57,7 +52,7 @@ const App = () => {
       setBlogs([...blogs, res]);
     }catch(err){
       notification(err.message, true);
-    };
+    }
   };
 
   const notification = (message, isError = false) => {
@@ -71,14 +66,9 @@ const App = () => {
   return (
     <div>
       <h2>Blogs</h2>
-        {msg && <Notification msg={msg} error={error}/>}
-        {!user ? 
-        <LoginForm 
-          login = {login}
-          username = {username}
-          setUsername = {setUsername}
-          password = {password} setPassword = {setPassword}
-        />
+      {msg && <Notification msg={msg} error={error}/>}
+      {!user ? 
+        <LoginForm login = {login}/>
         :
         <div>
           <b>Logged in as {user.username}</b>
@@ -90,6 +80,6 @@ const App = () => {
         </div>}
     </div>
   );
-}
+};
 
-export default App
+export default App;
