@@ -58,11 +58,10 @@ const App = () => {
   const updateBlog = async (updated, id) => {
     try {
       const res = await blogService.update(updated, id);
-      setBlogs([...blogs, res]);
+      setBlogs(await blogService.getAll());
     }catch(err) {
       notification(err.message, true);
     }
-    
   }
 
   const notification = (message, isError = false) => {
