@@ -54,6 +54,16 @@ const App = () => {
       notification(err.message, true);
     }
   };
+  
+  const updateBlog = async (updated, id) => {
+    try {
+      const res = await blogService.update(updated, id);
+      setBlogs([...blogs, res]);
+    }catch(err) {
+      notification(err.message, true);
+    }
+    
+  }
 
   const notification = (message, isError = false) => {
     isError ? setError(true) : setError(false);
@@ -75,7 +85,7 @@ const App = () => {
           <button onClick = {logout}>logout</button>
           <CreateBlog addBlog={addBlog}/>
           {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} />
+            <Blog key={blog.id} blog={blog} updateBlog={updateBlog}/>
           )}
         </div>}
     </div>
