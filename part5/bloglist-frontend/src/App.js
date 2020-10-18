@@ -62,7 +62,17 @@ const App = () => {
     }catch(err) {
       notification(err.message, true);
     }
-  }
+  };
+
+  const removeBlog = async(blog) => {
+    try {
+      await blogService.remove(blog.id);
+      setBlogs(blogs.filter(b => b.id !== blog.id));
+      notification(`${blog.title} by ${blog.author} removed.`);
+    } catch (err) {
+      notification(err.message, true);
+    }
+  };
 
   const notification = (message, isError = false) => {
     isError ? setError(true) : setError(false);
@@ -86,7 +96,8 @@ const App = () => {
           <button onClick = {logout}>logout</button>
           <CreateBlog addBlog={addBlog}/>
           {sortedBlogs.map(blog =>
-            <Blog key={blog.id} blog={blog} updateBlog={updateBlog}/>
+            <Blog key={blog.id} blog={blog} user={user}
+            updateBlog={updateBlog} removeBlog={removeBlog}/>
           )}
         </div>}
     </div>
