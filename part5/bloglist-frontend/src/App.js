@@ -57,7 +57,7 @@ const App = () => {
   
   const updateBlog = async (updated, id) => {
     try {
-      const res = await blogService.update(updated, id);
+      await blogService.update(updated, id);
       setBlogs(await blogService.getAll());
     }catch(err) {
       notification(err.message, true);
@@ -72,6 +72,8 @@ const App = () => {
     }, 3000);
   }; 
 
+  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
+
   return (
     <div>
       <h2>Blogs</h2>
@@ -83,7 +85,7 @@ const App = () => {
           <b>Logged in as {user.username}</b>
           <button onClick = {logout}>logout</button>
           <CreateBlog addBlog={addBlog}/>
-          {blogs.map(blog =>
+          {sortedBlogs.map(blog =>
             <Blog key={blog.id} blog={blog} updateBlog={updateBlog}/>
           )}
         </div>}
