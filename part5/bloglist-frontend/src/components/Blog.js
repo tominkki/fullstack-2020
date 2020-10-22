@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './styles/blog.css';
 
@@ -15,12 +15,12 @@ const Blog = ({ blog, user, updateBlog, removeBlog }) => {
     };
     updateBlog(updated, blog.id);
   };
-  
+
   const remove = () => {
     if (window.confirm(`Remove ${blog.title} by ${blog.author}?`)) {
       removeBlog(blog);
     }
-  }
+  };
 
   return (
     <div className="blog">
@@ -29,7 +29,7 @@ const Blog = ({ blog, user, updateBlog, removeBlog }) => {
         <button onClick={() => setVisibility(!visibility)}>{visibility ? 'hide' : 'show'}</button>
         <br/>
       </>
-      {visibility && 
+      {visibility &&
       <>
         url: {blog.url}<br/>
         likes: {blog.likes}

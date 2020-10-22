@@ -15,7 +15,7 @@ const App = () => {
   useEffect(() => {
     (async () => {
       const blogs = await blogService.getAll();
-      setBlogs(blogs); 
+      setBlogs(blogs);
     })();
   },[]);
 
@@ -36,7 +36,7 @@ const App = () => {
     }catch (err) {
       notification('wrong username or password', true);
     }
-  }; 
+  };
 
   const logout = () => {
     window.localStorage.removeItem('loggedUser');
@@ -54,7 +54,7 @@ const App = () => {
       notification(err.message, true);
     }
   };
-  
+
   const updateBlog = async (updated, id) => {
     try {
       await blogService.update(updated, id);
@@ -80,7 +80,7 @@ const App = () => {
     setTimeout(() => {
       setMsg(null);
     }, 3000);
-  }; 
+  };
 
   const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
 
@@ -88,7 +88,7 @@ const App = () => {
     <div>
       <h2>Blogs</h2>
       {msg && <Notification msg={msg} error={error}/>}
-      {!user ? 
+      {!user ?
         <LoginForm login = {login}/>
         :
         <div>
@@ -97,7 +97,7 @@ const App = () => {
           <CreateBlog addBlog={addBlog}/>
           {sortedBlogs.map(blog =>
             <Blog key={blog.id} blog={blog} user={user}
-            updateBlog={updateBlog} removeBlog={removeBlog}/>
+              updateBlog={updateBlog} removeBlog={removeBlog}/>
           )}
         </div>}
     </div>

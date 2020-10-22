@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles/notification.css';
 
-const Notification = ({msg, error}) => {
-  
+const Notification = ({ msg, error }) => {
+
   if(error){
     return(
       <div className='error'>
@@ -22,6 +22,6 @@ const Notification = ({msg, error}) => {
 Notification.propTypes = {
   msg: PropTypes.string.isRequired,
   error: PropTypes.bool
-}
+};
 
 export default Notification;
