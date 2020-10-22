@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import './styles/blog.css';
 
 const Blog = ({ blog, user, updateBlog, removeBlog }) => {
@@ -22,22 +23,29 @@ const Blog = ({ blog, user, updateBlog, removeBlog }) => {
   }
 
   return (
-  <div className="blog">
-    <>
-      {blog.title} by {blog.author}
-      <button onClick={() => setVisibility(!visibility)}>{visibility ? 'hide' : 'show'}</button>
-      <br/>
-    </>
-    {visibility && 
-    <>
-      url: {blog.url}<br/>
-      likes: {blog.likes}
-      <button onClick={addLike}>like</button><br/>
-      {blog.user.name}<br/>
-      {blog.user.id === user.id && <button onClick={remove}>remove</button>}
-    </>}
-  </div>
-);
+    <div className="blog">
+      <>
+        {blog.title} by {blog.author}
+        <button onClick={() => setVisibility(!visibility)}>{visibility ? 'hide' : 'show'}</button>
+        <br/>
+      </>
+      {visibility && 
+      <>
+        url: {blog.url}<br/>
+        likes: {blog.likes}
+        <button onClick={addLike}>like</button><br/>
+        {blog.user.name}<br/>
+        {blog.user.id === user.id && <button onClick={remove}>remove</button>}
+      </>}
+    </div>
+  );
+};
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  updateBlog: PropTypes.func.isRequired,
+  removeBlog: PropTypes.func.isRequired
 };
 
 export default Blog;
