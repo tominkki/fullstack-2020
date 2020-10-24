@@ -50,3 +50,18 @@ test('renders url and likes when show button is clicked', () => {
     'likes: 3'
   );
 });
+
+test('clicking like button twice calls eventhandler twice', () => {
+  const mockHandler = jest.fn();
+  const component = render(
+    <Blog blog={blog} user={user} updateBlog={mockHandler}/>
+  );
+
+  const showBtn = component.getByText('show');
+  fireEvent.click(showBtn);
+  const likeBtn = component.getByText('like');
+  fireEvent.click(likeBtn);
+  fireEvent.click(likeBtn);
+
+  expect(mockHandler.mock.calls).toHaveLength(2);
+});
