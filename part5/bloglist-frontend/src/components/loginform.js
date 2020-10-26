@@ -21,20 +21,20 @@ const LoginForm = ({ login }) => {
             <tr>
               <td>username: </td>
               <td>
-                <input value = {username}
+                <input id='username' value = {username}
                   onChange = {({ target }) => setUsername(target.value)}/>
               </td>
             </tr>
             <tr>
               <td>password: </td>
               <td>
-                <input type = "password" value = {password}
+                <input id='pass' type = "password" value = {password}
                   onChange = {({ target }) => setPassword(target.value)}/>
               </td>
             </tr>
           </tbody>
         </table>
-        <div><button type="submit">login</button></div>
+        <div><button id='login-btn' type="submit">login</button></div>
       </form>
     </>
   );
