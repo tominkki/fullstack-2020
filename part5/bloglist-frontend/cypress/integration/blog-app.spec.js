@@ -38,9 +38,12 @@ describe('Blog app', function() {
 
   describe('Logged in user', function() {
     beforeEach(function() {
-      cy.get('#username').type('niilo22');
-      cy.get('#pass').type('mrew');
-      cy.get('#login-btn').click();
+      cy.request('POST', 'http://localhost:3003/api/login', {
+        username: 'niilo22', password: 'mrew'
+      }).then(res => {
+        localStorage.setItem('loggedUser', JSON.stringify(res.body));
+      });
+      cy.visit('http://localhost:3000');
     });
 
     it('can create blog', function() {
@@ -56,6 +59,12 @@ describe('Blog app', function() {
       cy.contains('show').click();
       cy.contains('like').click();
       cy.contains('likes: 223');
+    });
+
+    it('can remove own blog', function() {
+      cy.contains('show').click();
+      cy.contains('remove').click();
+      cy.should('not.contain', 'maistuis varmaan sullekki');
     });
   })
 });
