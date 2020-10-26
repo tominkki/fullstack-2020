@@ -51,7 +51,7 @@ const CreateBlog = ({ addBlog }) => {
             </tr>
           </tbody>
         </table>
-        <div><button type="submit">create</button></div>
+        <div><button id='create-btn' type="submit">create</button></div>
       </form>
       <div style={hide}><button onClick={() => setVisibility(false)}>cancel</button></div>
     </>

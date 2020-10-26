@@ -1,3 +1,9 @@
+const newBlog = {
+  title: 'Tule viihtymään!',
+  author: 'IO-virta',
+  url: 'kuisti.org'
+};
+
 describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/test/init');
@@ -29,4 +35,21 @@ describe('Blog app', function() {
       cy.contains('Logged in as niilo22');
     });
   });
+
+  describe('Logged in user', function() {
+    beforeEach(function() {
+      cy.get('#username').type('niilo22');
+      cy.get('#pass').type('mrew');
+      cy.get('#login-btn').click();
+    });
+
+    it('can create blog', function() {
+      cy.contains('create blog').click();
+      cy.get('#title').type(newBlog.title);
+      cy.get('#author').type(newBlog.author);
+      cy.get('#url').type(newBlog.url);
+      cy.get('#create-btn').click();
+      cy.contains(`${newBlog.title} by ${newBlog.author}`);
+    });
+  })
 });
