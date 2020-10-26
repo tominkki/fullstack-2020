@@ -51,5 +51,11 @@ describe('Blog app', function() {
       cy.get('#create-btn').click();
       cy.contains(`${newBlog.title} by ${newBlog.author}`);
     });
+
+    it('can like blogs', function() {
+      cy.contains('show').click();
+      cy.contains('like').click();
+      cy.contains('likes: 223');
+    });
   })
 });
