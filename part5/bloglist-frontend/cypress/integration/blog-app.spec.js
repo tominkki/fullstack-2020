@@ -66,5 +66,16 @@ describe('Blog app', function() {
       cy.contains('remove').click();
       cy.should('not.contain', 'maistuis varmaan sullekki');
     });
-  })
+
+    it('blogs are sorted according to likes', function() {
+      cy.contains('show').click(); 
+      cy.contains('show').click();        
+      cy.get('.likes').then(($likes) => {
+          const likes = Array.from($likes);
+          cy.expect(likes.every(function (elem, i) {
+            return i === 0 || elem <= likes[i-1];
+          })).to.be.true;
+      });
+    });
+  });
 });
