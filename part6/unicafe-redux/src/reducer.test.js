@@ -67,7 +67,7 @@ describe('unicafe reducer', () => {
     const action = {
       type: 'ZERO'
     };
-    const state = {good: 4, ok: 12, bad: 666};
+    const state = { good: 4, ok: 12, bad: 666 };
 
     deepFreeze(state);
     const newState = counterReducer(state, action);
