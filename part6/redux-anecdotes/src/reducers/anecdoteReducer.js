@@ -44,4 +44,23 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+const addVote = (id) => ({
+  type: 'VOTE',
+  data: { id }
+});
+
+const newAnecdote = (txt) => ({
+  type: 'NEW',
+  data: {
+    content: txt,
+    id: generateId(),
+    votes: 0
+  }
+});
+
+
+export {
+  reducer,
+  addVote,
+  newAnecdote
+};
