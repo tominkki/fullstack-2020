@@ -1,3 +1,8 @@
 const generateId = () => (100000 * Math.random()).toFixed(0);
 
-export default generateId;
+const sortedByVotes = (objArr) => (objArr.sort((a, b) => (b.votes - a.votes)));
+
+export {
+  generateId,
+  sortedByVotes
+};

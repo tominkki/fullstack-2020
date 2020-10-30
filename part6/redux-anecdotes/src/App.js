@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import generateId from './utils/utils';
+import { generateId, sortedByVotes} from './utils/utils';
 
 const App = () => {
   const anecdotes = useSelector(state => state);
@@ -32,7 +32,7 @@ const App = () => {
   return (
     <div>
       <h2>Anecdotes</h2>
-      {anecdotes.map(anecdote =>
+      {sortedByVotes(anecdotes).map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
