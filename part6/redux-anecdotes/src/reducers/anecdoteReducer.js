@@ -24,23 +24,26 @@ const reducer = (state = initialState, action) => {
   console.log('action', action);
 
   switch (action.type) {
-    case 'VOTE':
-       const id = action.data.id;
-       const anecdoteToUpdate = state.find(obj => obj.id === id);
-       const updated = {
-         ...anecdoteToUpdate,
-         votes: anecdoteToUpdate.votes + 1
-       };
+  case 'VOTE': {
+    const id = action.data.id;
+    const anecdoteToUpdate = state.find(obj => obj.id === id);
+    const updated = {
+      ...anecdoteToUpdate,
+      votes: anecdoteToUpdate.votes + 1
+    };
 
-       return state.map(obj =>
-          obj.id !== id ? obj : updated
-        );
+    return state.map(obj =>
+      obj.id !== id ? obj : updated
+    );
+  }
 
-    case 'NEW':
-      return [...state, action.data];
+  case 'NEW': {
+    return [...state, action.data];
+  }
 
-    default:
-      return state;
+  default: {
+    return state;
+  }
   }
 };
 
