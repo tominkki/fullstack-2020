@@ -5,7 +5,13 @@ import { show, hide } from '../reducers/notification-reducer';
 import { sortedByVotes } from '../utils/utils';
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector(state => state.anecdotes);
+  const anecdotes = useSelector(state => {
+    return state.filter
+      ? state.anecdotes.filter(anecdote =>
+        anecdote.content.toLowerCase().includes(state.filter.toLowerCase())
+      )
+      : state.anecdotes;
+  });
   const dispatch = useDispatch();
 
   const vote = (anecdote) => {
