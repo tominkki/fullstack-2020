@@ -1,4 +1,5 @@
 import { generateId } from '../utils/utils';
+import anecdoteService from '../services/anecdotes';
 
 const anecdoteReducer = (state = [], action) => {
   switch (action.type) {
@@ -39,10 +40,15 @@ const newAnecdote = data => ({
   data
 });
 
-const initAnecdotes = data => ({
-  type: 'INIT',
-  data
-});
+const initAnecdotes = () => (
+  async dispatch => {
+    const data = await anecdoteService.getAll();
+    dispatch({
+      type: 'INIT',
+      data
+    });
+  }
+);
 
 export {
   anecdoteReducer,
