@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changeFilter } from '../reducers/filter-reducer';
 
-const Filter = ({changeFilter}) => {
+const Filter = ({ changeFilter }) => {
   const handleFilter = (e) => {
     changeFilter(e.target.value);
   };
@@ -19,13 +19,11 @@ const Filter = ({changeFilter}) => {
   );
 };
 
-const mapStateToProps = state => ({});
-
 const mapDispatchToProps = {
   changeFilter
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Filter);

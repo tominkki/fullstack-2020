@@ -1,10 +1,13 @@
-const notificationReducer = (state = '', action) => {
+const notificationReducer = (state = {}, action) => {
   switch(action.type) {
   case 'SHOW': {
-    return action.txt;
+    if(state.duration) {
+      clearTimeout(state.duration);
+    }
+    return action.data;
   }
   case 'HIDE': {
-    return '';
+    return {};
   }
   default: {
     return state;
@@ -16,11 +19,13 @@ const show  = (txt, duration) => (
   async dispatch => {
     dispatch({
       type: 'SHOW',
-      txt
+      data: {
+        txt,
+        duration: setTimeout(() => {
+          dispatch(hide());
+        }, duration*1000)
+      }
     });
-    setTimeout(() => {
-      dispatch(hide());
-    }, duration*1000);
   }
 );
 

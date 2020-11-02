@@ -22,14 +22,12 @@ const AnecdoteForm = ({ newAnecdote, show }) => {
   );
 };
 
-const mapStateToProps = state => ({});
-
 const mapDispatchToProps = {
   newAnecdote,
   show
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(AnecdoteForm);
