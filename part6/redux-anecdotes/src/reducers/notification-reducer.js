@@ -12,7 +12,17 @@ const notificationReducer = (state = '', action) => {
   }
 };
 
-const show  = (txt) => ({ type: 'SHOW', txt });
+const show  = (txt, duration) => (
+  async dispatch => {
+    dispatch({
+      type: 'SHOW',
+      txt
+    });
+    setTimeout(() => {
+      dispatch(hide());
+    }, duration*1000);
+  }
+);
 
 const hide = () => ({ type: 'HIDE' });
 
