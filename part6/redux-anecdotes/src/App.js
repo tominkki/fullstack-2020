@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import AnecdoteForm from './components/anecdote-form';
 import AnecdoteList from './components/anecdote-list';
 import Filter from './components/filter';
@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     dispatch(initAnecdotes());
   },[dispatch]);
-  
+
   return (
     <div>
       <h2>Anecdotes</h2>
@@ -22,6 +22,6 @@ const App = () => {
       <AnecdoteForm/>
     </div>
   );
-}
+};
 
 export default App;

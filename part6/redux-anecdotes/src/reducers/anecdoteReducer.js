@@ -1,4 +1,3 @@
-import { generateId } from '../utils/utils';
 import anecdoteService from '../services/anecdotes';
 
 const anecdoteReducer = (state = [], action) => {
@@ -35,10 +34,15 @@ const addVote = id => ({
   data: { id }
 });
 
-const newAnecdote = data => ({
-  type: 'NEW',
-  data
-});
+const newAnecdote = content => (
+  async dispatch => {
+    const data = await anecdoteService.addAnecdote(content);
+    dispatch({
+      type: 'NEW',
+      data
+    });
+  }
+);
 
 const initAnecdotes = () => (
   async dispatch => {

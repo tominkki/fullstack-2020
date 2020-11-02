@@ -9,9 +9,9 @@ const getAll = async() => {
 };
 
 const addAnecdote = async(content) => {
-  const newObj = {content, id: generateId(), votes:0 };
+  const newObj = { content, id: generateId(), votes:0 };
   const res = await axios.post(baseUrl, newObj);
   return res.data;
-}
+};
 
 export default { getAll, addAnecdote };
