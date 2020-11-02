@@ -29,10 +29,15 @@ const anecdoteReducer = (state = [], action) => {
   }
 };
 
-const addVote = id => ({
-  type: 'VOTE',
-  data: { id }
-});
+const addVote = anecdote => (
+  async dispatch => {
+    const data = await anecdoteService.addVote(anecdote);
+    dispatch({
+      type: 'VOTE',
+      data
+    });
+  }
+);
 
 const newAnecdote = content => (
   async dispatch => {
