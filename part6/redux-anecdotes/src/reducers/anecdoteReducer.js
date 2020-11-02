@@ -34,13 +34,9 @@ const addVote = id => ({
   data: { id }
 });
 
-const newAnecdote = txt => ({
+const newAnecdote = data => ({
   type: 'NEW',
-  data: {
-    content: txt,
-    id: generateId(),
-    votes: 0
-  }
+  data
 });
 
 const initAnecdotes = data => ({

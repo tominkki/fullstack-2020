@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { generateId } from '../utils/utils';
 
 const baseUrl = 'http://localhost:3001/anecdotes';
 
@@ -7,4 +8,10 @@ const getAll = async() => {
   return res.data;
 };
 
-export default { getAll };
+const addAnecdote = async(content) => {
+  const newObj = {content, id: generateId(), votes:0 };
+  const res = await axios.post(baseUrl, newObj);
+  return res.data;
+}
+
+export default { getAll, addAnecdote };
