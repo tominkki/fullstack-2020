@@ -41,8 +41,8 @@ const CreateNew = ({ addNew, setNotification }) => {
           <input {...info.input} />
         </div>
         <button>create</button>
-        <button type='button' onClick={() => {content.reset(); author.reset(); info.reset()}}>reset</button>
-      </form> 
+        <button type='button' onClick={() => {content.reset(); author.reset(); info.reset();}}>reset</button>
+      </form>
     </div>
   );
 };
