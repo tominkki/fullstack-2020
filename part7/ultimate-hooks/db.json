@@ -1,0 +1,46 @@
+{
+  "notes": [
+    {
+      "content": "custom-hookit aivan mahtavia",
+      "id": 1
+    },
+    {
+      "content": "paras feature ikinä <3",
+      "id": 2
+    },
+    {
+      "content": "afgsdsf",
+      "id": 3
+    },
+    {
+      "content": "afgsdsffsa",
+      "id": 4
+    },
+    {
+      "content": "rqe",
+      "id": 5
+    }
+  ],
+  "persons": [
+    {
+      "name": "mluukkai",
+      "number": "040-5483923",
+      "id": 1
+    },
+    {
+      "name": "moi",
+      "number": "123",
+      "id": 2
+    },
+    {
+      "name": "moi",
+      "number": "222",
+      "id": 3
+    },
+    {
+      "name": "fdsa",
+      "number": "312",
+      "id": 4
+    }
+  ]
+}
