@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { show } from './reducers/notification-reducer';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { initBlogs } from './reducers/blog-reducer';
+import { setLoggedUser, logout } from './reducers/user-reducer';
+
 import LoginForm from './components/loginform';
 import CreateBlog from './components/create-blog';
 import Notification from './components/notification';
-import blogService from './services/blogs';
-import loginService from './services/login-service';
 import BlogList from './components/blog-list';
 
 const App = () => {
   const dispatch = useDispatch();
-
-  const [user, setUser] = useState(null);
+  const user = useSelector(state => state.user);
 
   useEffect(() => {
     dispatch(initBlogs());
@@ -21,42 +19,23 @@ const App = () => {
   useEffect(() => {
     const loggedUser = window.localStorage.getItem('loggedUser');
     if(loggedUser) {
-      setUser(JSON.parse(loggedUser));
-      blogService.setToken(JSON.parse(loggedUser).token);
+      dispatch(setLoggedUser(JSON.parse(loggedUser)));
     }
-  },[]);
-
-  const login = async(credentials) => {
-    try {
-      const user = await loginService.login(credentials);
-      window.localStorage.setItem('loggedUser', JSON.stringify(user));
-      blogService.setToken(user.token);
-      setUser(user);
-    }catch (err) {
-      dispatch(show('wrong username or password', true));
-    }
-  };
-
-  const logout = () => {
-    window.localStorage.removeItem('loggedUser');
-    blogService.setToken('');
-    setUser(null);
-    dispatch(show('logged out'));
-  };
+  },[dispatch]);
 
   return (
     <div>
       <h2>Blogs</h2>
       <Notification/>
-      {!user ?
-        <LoginForm login = {login}/>
-        :
+      {!user && <LoginForm/>}
+      {user && 
         <div>
-          <b>Logged in as {user.username}</b>
-          <button onClick = {logout}>logout</button>
+          <b>Logged in as </b>
+          <button onClick={() => dispatch(logout())}>logout</button>
           <CreateBlog/>
           <BlogList/>
-        </div>}
+        </div>
+      }
     </div>
   );
 };

@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useField } from '../hooks/hooks';
+import { login } from '../reducers/user-reducer';
 
-const LoginForm = ({ login }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const LoginForm = () => {
 
-  const submitCreds = (event) => {
-    event.preventDefault();
-    login({ username, password });
-    setUsername('');
-    setPassword('');
+  const dispatch = useDispatch();
+
+  const username = useField('text');
+  const password = useField('password');
+
+  const submitCreds = e => {
+    console.log('yo')
+    e.preventDefault();
+    console.log('wat')
+    dispatch(login({
+      username: username.input.value,
+      password: password.input.value
+    }));
+    [username, password].map(state => state.reset);
   };
 
   return (
@@ -21,15 +30,13 @@ const LoginForm = ({ login }) => {
             <tr>
               <td>username: </td>
               <td>
-                <input id='username' value = {username}
-                  onChange = {({ target }) => setUsername(target.value)}/>
+                <input id='username' {...username.input}/>
               </td>
             </tr>
             <tr>
               <td>password: </td>
               <td>
-                <input id='pass' type = "password" value = {password}
-                  onChange = {({ target }) => setPassword(target.value)}/>
+                <input id='pass' {...password.input}/>
               </td>
             </tr>
           </tbody>
@@ -39,7 +46,5 @@ const LoginForm = ({ login }) => {
     </>
   );
 };
-
-LoginForm.propTypes = { login: PropTypes.func.isRequired };
 
 export default LoginForm;
