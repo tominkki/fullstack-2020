@@ -3,9 +3,17 @@ import blogService from '../services/blogs';
 const blogReducer = (state = [], action) => {
 
   switch(action.type) {
-    case 'INIT': {
-      return action.data;
-    }
+  case 'INIT': {
+    return action.data;
+  }
+
+  case 'ADD': {
+    return [...state, action.data];
+  }
+
+  default: {
+    return state;
+  }
   }
 };
 
@@ -19,7 +27,18 @@ const initBlogs = () => (
   }
 );
 
+const addBlog = content => (
+  async dispatch => {
+    const data = await blogService.create(content);
+    dispatch({
+      type: 'ADD',
+      data
+    });
+  }
+);
+
 export {
   blogReducer,
-  initBlogs
+  initBlogs,
+  addBlog
 };

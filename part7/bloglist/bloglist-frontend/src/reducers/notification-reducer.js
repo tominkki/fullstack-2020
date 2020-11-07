@@ -1,22 +1,22 @@
 const notificationReducer = (state = {}, action) => {
 
   switch(action.type) {
-    case 'SHOW': {
-      if(state.timeout) {
-        clearTimeout(state.timeout);
-      }
-      return action.data;
+  case 'SHOW': {
+    if(state.timeout) {
+      clearTimeout(state.timeout);
     }
-    case 'HIDE': {
-      return {};
-    }
-    default: {
-      return state;
-    }
+    return action.data;
+  }
+  case 'HIDE': {
+    return {};
+  }
+  default: {
+    return state;
+  }
   }
 };
 
-const hide = () => ({type: 'HIDE'});
+const hide = () => ({ type: 'HIDE' });
 
 const show = (msg, error = false, timeout = 4) => (
   async dispatch => {

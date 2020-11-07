@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { show } from './reducers/notification-reducer';
-import Blog from './components/Blog';
+import { initBlogs } from './reducers/blog-reducer';
 import LoginForm from './components/loginform';
 import CreateBlog from './components/create-blog';
 import Notification from './components/notification';
 import blogService from './services/blogs';
 import loginService from './services/login-service';
+import BlogList from './components/blog-list';
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const [blogs, setBlogs] = useState([]);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      const blogs = await blogService.getAll();
-      setBlogs(blogs);
-    })();
-  },[]);
+    dispatch(initBlogs());
+  }, [dispatch]);
 
   useEffect(() => {
     const loggedUser = window.localStorage.getItem('loggedUser');
@@ -47,39 +44,6 @@ const App = () => {
     dispatch(show('logged out'));
   };
 
-  const addBlog = async (newBlog) => {
-    try{
-      const res = await blogService.create(newBlog);
-      dispatch(show(`${res.title} by ${res.author} created.`));
-      setBlogs([...blogs, res]);
-    }catch(err){
-      dispatch(show(err.message, true));
-    }
-  };
-
-  const updateBlog = async (updated, id) => {
-    try {
-      await blogService.update(updated, id);
-      setBlogs(await blogService.getAll());
-    }catch(err) {
-      dispatch(show(err.message, true));
-    }
-  };
-
-  const removeBlog = async(blog) => {
-    try {
-      await blogService.remove(blog.id);
-      setBlogs(blogs.filter(b => b.id !== blog.id));
-      dispatch(show(`${blog.title} by ${blog.author} removed.`));
-    } catch (err) {
-      dispatch(show(err.message, true));
-    }
-  };
-
-
-
-  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
-
   return (
     <div>
       <h2>Blogs</h2>
@@ -90,11 +54,8 @@ const App = () => {
         <div>
           <b>Logged in as {user.username}</b>
           <button onClick = {logout}>logout</button>
-          <CreateBlog addBlog={addBlog}/>
-          {sortedBlogs.map(blog =>
-            <Blog key={blog.id} blog={blog} user={user}
-              updateBlog={updateBlog} removeBlog={removeBlog}/>
-          )}
+          <CreateBlog/>
+          <BlogList/>
         </div>}
     </div>
   );

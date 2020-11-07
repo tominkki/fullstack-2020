@@ -1,14 +1,14 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, fireEvent } from '@testing-library/react';
-import CreateBlog from '../create-blog'; 
+import CreateBlog from '../create-blog';
 
 test('creating blog calls right function with right parameters', () => {
   const newBlog = {
     title: 'Tule viihtymään!',
     author: 'IO-virta',
     url: 'kuisti.org'
-  }
+  };
 
   const addBlog = jest.fn();
 
@@ -26,7 +26,7 @@ test('creating blog calls right function with right parameters', () => {
       target: { value: newBlog[key] }
     });
   });
-  
+
   fireEvent.submit(form);
 
   expect(addBlog.mock.calls).toHaveLength(1);
