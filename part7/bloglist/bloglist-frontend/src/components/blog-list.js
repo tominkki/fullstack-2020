@@ -1,25 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { like, remove } from '../reducers/blog-reducer';
 import { useVisibility } from '../hooks/hooks';
 import './styles/blog.css';
 
 const Blog = ({ blog }) => {
 
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const visibility = useVisibility(false);
 
   const addLike = () => {
-    const updated = {
-      ...blog,
-      likes: blog.likes + 1,
-    };
-    //updateBlog(updated, blog.id);
+    dispatch(like(blog));
   };
 
-  const remove = () => {
+  const deleteBlog = () => {
     if (window.confirm(`Remove ${blog.title} by ${blog.author}?`)) {
-      //removeBlog(blog);
+      dispatch(remove(blog));
     }
   };
 
@@ -36,7 +33,7 @@ const Blog = ({ blog }) => {
               likes: <span className='likes'>{blog.likes}</span>
               <button onClick={addLike}>like</button><br/>
               {blog.user.name}<br/>
-              {/*blog.user.id === user.id && <button onClick={remove}>remove</button>*/}
+              <button onClick={deleteBlog}>remove</button>
             </>}
     </div>
   );
