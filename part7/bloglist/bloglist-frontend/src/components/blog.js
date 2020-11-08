@@ -1,0 +1,28 @@
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { like, remove } from '../reducers/blog-reducer';
+
+const Blog = ({blog}) => {
+
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+
+  if(!blog) return null;
+
+  return(
+    <div>
+      <h3>{blog.title} by {blog.author}</h3>
+      <a href={blog.url}>{blog.url}</a>
+      <p>
+        {blog.likes} likes 
+        <button onClick={() => dispatch(like(blog))}>like</button>
+      </p>
+      <p>added by {blog.user.name}</p>
+      {user.id === blog.user.id &&
+        <button onClick={() => dispatch(remove(blog))}>remove</button>
+      }
+    </div>
+  );
+};
+
+export default Blog;
