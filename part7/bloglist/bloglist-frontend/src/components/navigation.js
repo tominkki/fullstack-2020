@@ -14,10 +14,10 @@ const Navigation = () => {
 
   return(
     <div>
-        <Link to='/'>blogs</Link>
-        <Link to='/users'>users</Link>
-        {user.name} logged in
-        <button onClick={() => dispatch(logout())}>logout</button>
+      <Link to='/'>blogs</Link>
+      <Link to='/users'>users</Link>
+      {user.name} logged in
+      <button onClick={() => dispatch(logout())}>logout</button>
     </div>
   );
 };

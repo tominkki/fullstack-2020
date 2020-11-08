@@ -11,9 +11,9 @@ const LoginForm = () => {
   const password = useField('password');
 
   const submitCreds = e => {
-    console.log('yo')
+    console.log('yo');
     e.preventDefault();
-    console.log('wat')
+    console.log('wat');
     dispatch(login({
       username: username.input.value,
       password: password.input.value

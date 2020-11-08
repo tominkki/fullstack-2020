@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, useRouteMatch } from 'react-router-dom';
 import { initBlogs } from './reducers/blog-reducer';
 import { initUsers } from './reducers/users-reducer';
-import { setLoggedUser, logout } from './reducers/user-reducer';
+import { setLoggedUser } from './reducers/user-reducer';
 
 import LoginForm from './components/loginform';
 import CreateBlog from './components/create-blog';
@@ -16,7 +16,7 @@ import Navigation from './components/navigation';
 
 const App = () => {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(initBlogs());
     dispatch(initUsers());
@@ -40,13 +40,13 @@ const App = () => {
   const matchingBlog = blogMatch ?
     blogs.find(b => b.id === blogMatch.params.id)
     : null;
-  
+
   return (
     <div>
       <h2>Blogs</h2>
       <Navigation/>
       <Notification/>
-      {user ? 
+      {user ?
         <div>
           <Route exact path='/'>
             <CreateBlog/>

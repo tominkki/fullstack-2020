@@ -3,13 +3,13 @@ import usersService from '../services/users';
 const usersReducer = (state = [], action) => {
 
   switch(action.type) {
-    case 'INIT_USERS': {
-      return action.data;
-    }
+  case 'INIT_USERS': {
+    return action.data;
+  }
 
-    default: {
-      return state;
-    }
+  default: {
+    return state;
+  }
   }
 };
 
@@ -26,4 +26,4 @@ const initUsers = () => (
 export {
   usersReducer,
   initUsers
-}
+};

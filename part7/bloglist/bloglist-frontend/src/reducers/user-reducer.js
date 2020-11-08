@@ -6,21 +6,21 @@ const userReducer = (state = null, action) => {
 
   switch(action.type) {
 
-    case 'LOGIN': {
-      return action.data;
-    }
+  case 'LOGIN': {
+    return action.data;
+  }
 
-    case 'LOGGED': {
-      return action.data;
-    }
+  case 'LOGGED': {
+    return action.data;
+  }
 
-    case 'LOGOUT': {
-      return null;
-    }
+  case 'LOGOUT': {
+    return null;
+  }
 
-    default: {
-      return state;
-    }
+  default: {
+    return state;
+  }
   }
 };
 
