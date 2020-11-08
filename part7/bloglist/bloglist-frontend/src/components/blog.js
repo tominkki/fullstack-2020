@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { like, remove } from '../reducers/blog-reducer';
+import CommentForm from './comment-form';
 
 const Blog = ({ blog }) => {
 
@@ -23,6 +24,7 @@ const Blog = ({ blog }) => {
       }
       <br/>
       <b>comments</b>
+      <CommentForm id={blog.id}/>
       {blog.comments.map((comment, i) =>
         <li key={i}>{comment}</li>
       )}

@@ -73,10 +73,21 @@ const remove = content => (
   }
 );
 
+const newComment = (id, content) => (
+  async dispatch => {
+    const data = await blogService.addComment(id, content);
+    dispatch({
+      type: 'UPDATE',
+      data
+    });
+  }
+);
+
 export {
   blogReducer,
   initBlogs,
   addBlog,
   like,
-  remove
+  remove,
+  newComment
 };
