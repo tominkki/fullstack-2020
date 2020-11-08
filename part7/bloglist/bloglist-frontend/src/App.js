@@ -12,6 +12,7 @@ import BlogList from './components/blog-list';
 import UsersList from './components/user-list';
 import User from './components/user';
 import Blog from './components/blog';
+import Navigation from './components/navigation';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,12 +44,10 @@ const App = () => {
   return (
     <div>
       <h2>Blogs</h2>
+      <Navigation/>
       <Notification/>
-      {!user && <LoginForm/>}
-      {user && 
+      {user ? 
         <div>
-          <b>Logged in as {user.username}</b>
-          <button onClick={() => dispatch(logout())}>logout</button>
           <Route exact path='/'>
             <CreateBlog/>
             <BlogList/>
@@ -63,6 +62,8 @@ const App = () => {
             <Blog blog={matchingBlog}/>
           </Route>
         </div>
+        :
+        <LoginForm/>
       }
     </div>
   );
