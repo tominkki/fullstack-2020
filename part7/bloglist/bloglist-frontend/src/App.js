@@ -43,7 +43,6 @@ const App = () => {
 
   return (
     <div>
-      <h2>Blogs</h2>
       <Navigation/>
       <Notification/>
       {user ?
