@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { ALL_AUTHORS } from '../graphql/queries';
+import SetBirthYear from './set-birth-year';
 
 const Authors = (props) => {
   
@@ -37,7 +38,7 @@ const Authors = (props) => {
           )}
         </tbody>
       </table>
-
+      <SetBirthYear/>
     </div>
   );
 };
