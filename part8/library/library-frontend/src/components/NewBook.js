@@ -6,15 +6,12 @@ import { ALL_BOOKS, ALL_AUTHORS } from '../graphql/queries'
 const NewBook = (props) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [published, setPublished] = useState();
+  const [published, setPublished] = useState('');
   const [genre, setGenre] = useState('');
   const [genres, setGenres] = useState([]);
 
   const [ addBook ] = useMutation(ADD_BOOK, {
-    refetchQueries: [{query: ALL_BOOKS }, {query: ALL_AUTHORS}],
-    /*onError: (error) => {
-      console.log(error.graphQLErrors[0].message);
-    }*/
+    refetchQueries: [{query: ALL_BOOKS }, {query: ALL_AUTHORS}]
   });
 
   if (!props.show) {
@@ -24,8 +21,6 @@ const NewBook = (props) => {
   const submit = async (event) => {
     event.preventDefault();
 
-    console.log('add book...');
-    console.log({title, author, published, genres})
     try{
       await addBook({variables: {title, author, published, genres}});
     } catch (e) {
@@ -66,7 +61,7 @@ const NewBook = (props) => {
           <input
             type='number'
             value={published}
-            onChange={({ target }) => setPublished(target.value)}
+            onChange={({ target }) => setPublished(parseInt(target.value))}
           />
         </div>
         <div>
