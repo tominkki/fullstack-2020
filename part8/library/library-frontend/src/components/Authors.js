@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import Library from '../queries';
+import { ALL_AUTHORS } from '../graphql/queries';
 
 const Authors = (props) => {
   
-  const result = useQuery(Library.ALL_AUTHORS);
+  const result = useQuery(ALL_AUTHORS);
   
   if (!props.show) {
     return null;

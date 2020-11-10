@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import Library from '../queries';
+import {ALL_BOOKS} from '../graphql/queries';
 
 const Books = (props) => {
 
-  const result = useQuery(Library.ALL_BOOKS);
+  const result = useQuery(ALL_BOOKS);
 
   if (!props.show) {
     return null;

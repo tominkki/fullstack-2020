@@ -23,4 +23,4 @@ const ALL_BOOKS = gql`
   }
 `;
 
-export default { ALL_AUTHORS, ALL_BOOKS };
+export { ALL_AUTHORS, ALL_BOOKS };
