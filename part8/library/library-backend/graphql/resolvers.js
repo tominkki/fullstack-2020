@@ -15,11 +15,12 @@ const resolvers = {
   },
 
   Author: {
-
+    bookCount
   },
 
   Mutation: {
-    addBook
+    addBook,
+    editAuthor
   }
 };
 

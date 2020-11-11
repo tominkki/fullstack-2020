@@ -1,27 +1,33 @@
 const Book = require('../models/book');
 const Author = require('../models/author');
+const ObjectId = require('mongoose').Types.ObjectId;
 
-const bookCount = async () => await Book.collection.countDocuments();
+const bookCount = async (parent) => {
+  if(parent) {
+    return await Book.collection.countDocuments(
+      { author: new ObjectId(parent.id) }
+    );
+  }
+  return await Book.collection.countDocuments();
+};
 
 const authorCount = async () => await Author.collection.countDocuments();
 
 const allBooks = async (parent, args) => {
-  //filters here
-  return await Book.find({});
+  let filters = {};
+
+  if(args.author) {
+    const author = await Author.findOne({ name: args.author });
+    filters.author = author._id;
+  }
+  if(args.genre) {
+    filters.genres = args.genre;
+  }
+  return await Book.find(filters)
+    .populate('author', { name: 1 });
 };
 
 const allAuthors = async () => await Author.find({});
-
-/*
-allBooks: (parent, args) => {
-  if(args.author && args.genre) {
-    return books.filter(b => b.author === args.author && b.genres.includes(args.genre));
-  }
-  else if(args.author || args.genre) {
-    return books.filter(b => b.author === args.author || b.genres.includes(args.genre));
-  }
-  else return books;
-}*/
 
 module.exports = {
   bookCount,
