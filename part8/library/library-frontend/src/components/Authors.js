@@ -4,15 +4,15 @@ import { ALL_AUTHORS } from '../graphql/queries';
 import SetBirthYear from './set-birth-year';
 
 const Authors = (props) => {
-  
+
   const result = useQuery(ALL_AUTHORS);
-  
+
   if (!props.show) {
     return null;
   }
 
   if(result.loading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   }
 
   return (

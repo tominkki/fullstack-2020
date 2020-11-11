@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import {ALL_BOOKS} from '../graphql/queries';
+import { ALL_BOOKS } from '../graphql/queries';
 
 const Books = (props) => {
 
@@ -11,8 +11,8 @@ const Books = (props) => {
   }
 
   if(result.loading) {
-    return <div>loading...</div>
-  } 
+    return <div>loading...</div>;
+  }
 
   return (
     <div>
