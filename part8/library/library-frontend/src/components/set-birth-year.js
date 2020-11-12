@@ -6,8 +6,8 @@ import Select from 'react-select';
 
 const SetBirthYear = () => {
 
-  const [author, setAuthor] = useState(null);
-  const [setBornTo, setYear] = useState(null);
+  const [author, setAuthor] = useState('');
+  const [setBornTo, setYear] = useState('');
 
   const result = useQuery(ALL_AUTHORS);
   const [ editAuthor ] = useMutation(EDIT_AUTHOR, {

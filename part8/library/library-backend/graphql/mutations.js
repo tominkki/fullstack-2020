@@ -10,9 +10,18 @@ const addBook = async (parent, args, { currentUser }) => {
     throw new AuthenticationError('Not authenticated!');
   }
 
-  const book = new Book({ ...args });
+  let author = await Author.findOne({ name: args.author });
+
+  if(!author) {
+    author = new Author({ name: args.author });
+    author = await author.save();
+  }
+
   try{
-    return await book.save();
+    const book = await new Book({ ...args, author: author._id })
+      .populate('author', { name: 1 })
+      .save();
+    return await book.execPopulate();
   } catch (e) {
     throw new UserInputError(e.message, {
       invalidArgs: args
