@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const config = require('./utils/config');
 const typeDefs = require('./graphql/type-defs');
 const resolvers = require('./graphql/resolvers');
+const context = require('./graphql/context');
 
 (async() => {
   try {
@@ -21,6 +22,7 @@ const resolvers = require('./graphql/resolvers');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context
 });
 
 server.listen().then(({ url }) => {

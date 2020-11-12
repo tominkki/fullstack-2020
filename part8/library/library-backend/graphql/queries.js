@@ -29,9 +29,12 @@ const allBooks = async (parent, args) => {
 
 const allAuthors = async () => await Author.find({});
 
+const me = (parent, args, { currentUser }) => currentUser;
+
 module.exports = {
   bookCount,
   authorCount,
   allBooks,
-  allAuthors
+  allAuthors,
+  me
 };

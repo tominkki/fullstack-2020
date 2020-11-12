@@ -2,16 +2,19 @@ const {
   bookCount,
   authorCount,
   allBooks,
-  allAuthors
+  allAuthors,
+  me
 } = require('./queries');
-const { addBook, editAuthor } = require('./mutations');
+const { addBook, editAuthor,
+  createUser, login } = require('./mutations');
 
 const resolvers = {
   Query: {
     bookCount,
     authorCount,
     allBooks,
-    allAuthors
+    allAuthors,
+    me
   },
 
   Author: {
@@ -20,7 +23,9 @@ const resolvers = {
 
   Mutation: {
     addBook,
-    editAuthor
+    editAuthor,
+    createUser,
+    login
   }
 };
 
