@@ -4,6 +4,7 @@ import Authors from './components/Authors';
 import Books from './components/Books';
 import Login from './components/login';
 import NewBook from './components/NewBook';
+import Recommend from './components/recommend';
 
 const App = () => {
 
@@ -22,7 +23,7 @@ const App = () => {
     setToken(null);
     localStorage.removeItem('library-token');
     client.resetStore();
-    if(page === 'add'){
+    if(page === 'add' || page === 'recommend'){
       setPage('authors');
     }
   };
@@ -33,7 +34,10 @@ const App = () => {
         <button onClick={() => setPage('authors')}>authors</button>
         <button onClick={() => setPage('books')}>books</button>
         {token &&
-          <button onClick={() => setPage('add')}>add book</button>
+          <>
+            <button onClick={() => setPage('add')}>add book</button>
+            <button onClick={() => setPage('recommend')}>recommend</button>
+          </>
         }
         {!token ?
           <button onClick={() => setPage('login')}>login</button>
@@ -57,6 +61,9 @@ const App = () => {
       <Login
         show={page === 'login'}
         setToken={setToken}
+      />
+      <Recommend
+        show={page === 'recommend'}
       />
     </div>
   );

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { ALL_BOOKS } from '../graphql/queries';
 
-const Filter = ({ getBooks }) => {
+const Filter = ({ getBooks, setGenre }) => {
   const { loading, data } = useQuery(ALL_BOOKS);
 
   if(loading) return null;
@@ -17,23 +17,29 @@ const Filter = ({ getBooks }) => {
     return allGenres;
   };
 
+  const handleClick = (genre) => {
+    getBooks({ variables: { genre } });
+    setGenre(genre);
+  };
+
   return(
     <div>
       {genres().map(g =>
         <button key={g}
-          onClick={() => getBooks({ variables: { genre: g } })}>
+          onClick={() => handleClick(g)}>
           {g}
         </button>
       )}
-      <button onClick={() => getBooks()}>all genres</button>
+      <button onClick={() => {getBooks(); setGenre('all genres');}}>all genres</button>
     </div>
   );
 };
 
 const Books = (props) => {
 
+  const [genre, setGenre] = useState('all genres');
   const [getBooks, { loading, data }] = useLazyQuery(ALL_BOOKS, {
-    fetchPolicy: 'no-cache'
+    fetchPolicy: 'network-only'
   });
 
   useEffect(() => {
@@ -55,6 +61,7 @@ const Books = (props) => {
   return (
     <div>
       <h2>books</h2>
+      <p>in genre <b>{genre}</b></p>
       <table>
         <tbody>
           <tr>
@@ -75,7 +82,7 @@ const Books = (props) => {
           )}
         </tbody>
       </table>
-      <Filter getBooks={getBooks}/>
+      <Filter getBooks={getBooks} setGenre={setGenre}/>
     </div>
   );
 };

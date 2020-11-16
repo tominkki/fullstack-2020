@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useApolloClient } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../graphql/mutations';
 
 const Login = ({ show, setToken }) => {
 
+  const client = useApolloClient();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,6 +20,7 @@ const Login = ({ show, setToken }) => {
       const token = result.data.login.value;
       setToken(token);
       localStorage.setItem('library-token', token);
+      client.resetStore();
     }
   }, [result.data, setToken]);
 

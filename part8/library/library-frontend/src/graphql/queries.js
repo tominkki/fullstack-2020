@@ -28,4 +28,14 @@ const ALL_BOOKS = gql`
   }
 `;
 
-export { ALL_AUTHORS, ALL_BOOKS };
+const ME = gql`
+  query {
+    me {
+      username
+      favoriteGenre
+      id
+    }
+  }
+`;
+
+export { ALL_AUTHORS, ALL_BOOKS, ME };
