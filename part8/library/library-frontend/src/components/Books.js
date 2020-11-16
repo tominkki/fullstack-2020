@@ -1,17 +1,55 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import React, { useEffect } from 'react';
+import { useQuery, useLazyQuery } from '@apollo/client';
 import { ALL_BOOKS } from '../graphql/queries';
+
+const Filter = ({ getBooks }) => {
+  const { loading, data } = useQuery(ALL_BOOKS);
+
+  if(loading) return null;
+
+  const genres = () => {
+    let allGenres = [];
+    data.allBooks.forEach(book => {
+      allGenres = [...allGenres, ...book.genres.filter(
+        g => !allGenres.includes(g)
+      )];
+    });
+    return allGenres;
+  };
+
+  return(
+    <div>
+      {genres().map(g =>
+        <button key={g}
+          onClick={() => getBooks({ variables: { genre: g } })}>
+          {g}
+        </button>
+      )}
+      <button onClick={() => getBooks()}>all genres</button>
+    </div>
+  );
+};
 
 const Books = (props) => {
 
-  const result = useQuery(ALL_BOOKS);
+  const [getBooks, { loading, data }] = useLazyQuery(ALL_BOOKS, {
+    fetchPolicy: 'no-cache'
+  });
+
+  useEffect(() => {
+    getBooks();
+  },[props.show, getBooks]);
 
   if (!props.show) {
     return null;
   }
 
-  if(result.loading) {
-    return <div>loading...</div>;
+  if(loading) {
+    return (
+      <div>
+      loading...
+      </div>
+    );
   }
 
   return (
@@ -28,7 +66,7 @@ const Books = (props) => {
               published
             </th>
           </tr>
-          {result.data.allBooks.map(b =>
+          {data.allBooks.map(b =>
             <tr key={b.title}>
               <td>{b.title}</td>
               <td>{b.author.name}</td>
@@ -37,6 +75,7 @@ const Books = (props) => {
           )}
         </tbody>
       </table>
+      <Filter getBooks={getBooks}/>
     </div>
   );
 };
