@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useApolloClient } from '@apollo/client';
+import { useApolloClient, useSubscription } from '@apollo/client';
+import { BOOK_ADDED } from './graphql/subscriptions';
 import Authors from './components/Authors';
 import Books from './components/Books';
 import Login from './components/login';
@@ -18,6 +19,18 @@ const App = () => {
       setToken(token);
     }
   }, []);
+
+  useSubscription(BOOK_ADDED, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      const book = subscriptionData.data.bookAdded;
+      window.alert(
+        `Book added!\n
+        Title: ${book.title}\n
+        Author: ${book.author.name}\n
+        Published: ${book.published}`
+      );
+    }
+  });
 
   const logout = () => {
     setToken(null);

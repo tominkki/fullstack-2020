@@ -22,7 +22,7 @@ const Login = ({ show, setToken }) => {
       localStorage.setItem('library-token', token);
       client.resetStore();
     }
-  }, [result.data, setToken]);
+  }, [result.data, setToken, client]);
 
   if (!show) return null;
 
