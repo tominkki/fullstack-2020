@@ -7,6 +7,7 @@ const {
 } = require('./queries');
 const { addBook, editAuthor,
   createUser, login } = require('./mutations');
+const pubsub = require('./pubsub');
 
 const resolvers = {
   Query: {
@@ -26,6 +27,12 @@ const resolvers = {
     editAuthor,
     createUser,
     login
+  },
+
+  Subscription: {
+    bookAdded: {
+      subscribe: () => pubsub.asyncIterator(['BOOK_ADDED'])
+    }
   }
 };
 

@@ -4,6 +4,7 @@ const { JWT_PASS } = require('../utils/config');
 const Book = require('../models/book');
 const Author = require('../models/author');
 const User = require('../models/user');
+const pubsub = require('./pubsub');
 
 const addBook = async (parent, args, { currentUser }) => {
   if(!currentUser) {
@@ -21,6 +22,9 @@ const addBook = async (parent, args, { currentUser }) => {
     const book = await new Book({ ...args, author: author._id })
       .populate('author', { name: 1 })
       .save();
+
+    pubsub.publish('BOOK_ADDED', { bookAdded: await book.execPopulate() });
+
     return await book.execPopulate();
   } catch (e) {
     throw new UserInputError(e.message, {
