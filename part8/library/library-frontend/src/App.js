@@ -6,6 +6,7 @@ import Books from './components/Books';
 import Login from './components/login';
 import NewBook from './components/NewBook';
 import Recommend from './components/recommend';
+import { ALL_AUTHORS, ALL_BOOKS } from './graphql/queries';
 
 const App = () => {
 
@@ -20,9 +21,30 @@ const App = () => {
     }
   }, []);
 
+  const updateCache = book => {
+    const isIncluded = (data, obj) =>
+      data.map(b => b.id).includes(obj.id);
+
+    const bookCache = client.readQuery({ query: ALL_BOOKS });
+    const authorCache = client.readQuery({ query: ALL_AUTHORS });
+    if(!isIncluded(bookCache.allBooks, book)) {
+      client.writeQuery({
+        query: ALL_BOOKS,
+        data: { allBooks: [...bookCache.allBooks, book] }
+      });
+    }
+    if(!isIncluded(authorCache.allAuthors, book.author)){
+      client.writeQuery({
+        query: ALL_AUTHORS,
+        data: { allAuthors: [...authorCache.allAuthors, book.author] }
+      });
+    }
+  };
+
   useSubscription(BOOK_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
       const book = subscriptionData.data.bookAdded;
+      updateCache(book);
       window.alert(
         `Book added!\n
         Title: ${book.title}\n

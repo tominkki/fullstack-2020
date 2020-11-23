@@ -6,7 +6,9 @@ const BOOK_ADDED = gql`
       title
       published
       author {
+        id
         name
+        born
       }
       id
       genres
