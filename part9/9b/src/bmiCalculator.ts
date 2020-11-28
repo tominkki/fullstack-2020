@@ -37,6 +37,7 @@ const calculateBmi = (height: number, weight: number) : string => {
   }
 };
 
+/*
 interface parsedArgs {
   height: number;
   weight: number;
@@ -62,3 +63,6 @@ try {
 } catch (e) {
   console.error(e.message);
 }
+*/
+
+export default calculateBmi;
