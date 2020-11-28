@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint --fix .",
     "dev": "ts-node-dev index.ts",
+    "start": "NODE_ENV=production ts-node index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "calculateBmi": "nodemon ./src/bmiCalculator.ts",
     "calculateExercises": "nodemon ./src/exerciseCalculator.ts"
