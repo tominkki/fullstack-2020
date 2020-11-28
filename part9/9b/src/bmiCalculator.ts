@@ -10,7 +10,7 @@ const categories = [
 ];
 
 const calculateBmi = (height: number, weight: number) : string => {
-  const bmi = weight / Math.pow(height/100, 2);
+  const bmi = weight / Math.pow(height / 100, 2);
 
   if (bmi <= 15) {
     return categories[0];
@@ -36,7 +36,30 @@ const calculateBmi = (height: number, weight: number) : string => {
   if (bmi > 40) {
     return categories[7];
   }
+};
+
+interface parsedArgs {
+  height: number;
+  weight: number;
 }
 
+const parseArgs = (args: Array<string>) : parsedArgs => {
+  if (args.length !== 4) {
+    throw new Error('Invalid amount of arguments');
+  }
+  if (isNaN(Number(args[2])) || isNaN(Number(args[3]))) {
+    throw new Error('Arguments must be numbers');
+  }
 
-console.log(calculateBmi(180, 74));
+  return {
+    height: Number(args[2]),
+    weight: Number(args[3])
+  };
+};
+
+try {
+  const { height, weight } = parseArgs(process.argv);
+  console.log(calculateBmi(height, weight));
+} catch (e) {
+  console.error(e.message);
+}

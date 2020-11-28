@@ -19,25 +19,47 @@ const calculateExercises = (hours: Array<number>, target: number) : Result => {
   if(target - average > 1) {
     rating = 1;
     ratingDescription = 'Get your life in order.';
-  }
-  else if(1 >= target - average && target - average >= -1) {
+  } else if(1 >= target - average && target - average >= -1) {
     rating = 2;
     ratingDescription = 'Good job!';
-  }
-  else {
+  } else {
     rating = 3;
-    ratingDescription = 'Awesome, you must be Schwarzenegger.'
+    ratingDescription = 'Awesome, you must be Schwarzenegger.';
   }
 
   return {
-   periodLength,
-   trainingDays,
-   success,
-   rating,
-   ratingDescription,
-   target,
-   average
-  }
+    periodLength,
+    trainingDays,
+    success,
+    rating,
+    ratingDescription,
+    target,
+    average
+  };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+interface parsed {
+  hours: Array<number>;
+  target: number
+}
+
+const parse = (args: Array<string>) : parsed => {
+  if (args.length < 4) {
+    throw new Error('Invalid amount of arguments');
+  }
+  if (isNaN(Number(args[2])) || args.slice(3).every(elem => isNaN(Number(elem)))) {
+    throw new Error('Arguments must be numbers');
+  }
+
+  return {
+    hours: args.slice(3).map(e => Number(e)),
+    target: Number(args[2])
+  };
+};
+
+try {
+  const { hours, target } = parse(process.argv);
+  console.log(calculateExercises(hours, target));
+} catch (e) {
+  console.error(e.message);
+}
