@@ -32,8 +32,7 @@ const calculateBmi = (height: number, weight: number) : string => {
   }
   if (bmi <= 40) {
     return categories[6];
-  }
-  if (bmi > 40) {
+  } else {
     return categories[7];
   }
 };
