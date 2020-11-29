@@ -60,6 +60,6 @@ const parse = (args: Array<string>) : parsed => {
 try {
   const { hours, target } = parse(process.argv);
   console.log(calculateExercises(hours, target));
-} catch (e) {
-  console.error(e.message);
+} catch ({ message }) {
+  console.error(message);
 }
