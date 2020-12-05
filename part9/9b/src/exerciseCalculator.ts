@@ -63,3 +63,5 @@ try {
 } catch ({ message }) {
   console.error(message);
 }
+
+export default calculateExercises;
