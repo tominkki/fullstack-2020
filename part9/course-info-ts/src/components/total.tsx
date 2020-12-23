@@ -1,10 +1,14 @@
 import React from 'react';
-import { CourseParts } from '../types';
+import { CoursePart } from '../types';
+
+interface CourseParts {
+  courseParts: Array<CoursePart>;
+}
 
 const Total: React.FC<CourseParts> = ({ courseParts }) => (
   <div>
     <p>
-            Number of exercises {courseParts.reduce((acc, curr) => acc + curr.exerciseCount, 0)}
+       Total exercises {courseParts.reduce((acc, curr) => acc + curr.exerciseCount, 0)}
     </p>
   </div>
 );
