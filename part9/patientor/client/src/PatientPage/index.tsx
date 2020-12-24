@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 import { Patient } from '../types';
-import { useStateValue } from '../state';
+import { useStateValue, updatePatient } from '../state';
 import { apiBaseUrl } from '../constants';
 
 import { Icon } from 'semantic-ui-react';
@@ -19,7 +19,7 @@ const PatientPage: React.FC = () => {
       const res = await axios
           .get<Patient>(`${apiBaseUrl}/patients/${id}`);
       
-          dispatch({ type: 'UPDATE_PATIENT', payload: res.data});
+          dispatch(updatePatient(res.data));
     } catch ({ message }) {
       console.log(message);
     }
