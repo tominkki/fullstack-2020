@@ -1,6 +1,10 @@
-import { newPatient } from '../types';
-import { Gender } from '../types';
+import { newPatient, Gender } from '../types';
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access*/
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
+
 
 const isString = (text: any): text is string => {
     return typeof text === 'string' || text instanceof String;
@@ -11,7 +15,7 @@ const isGender = (param: any): param is Gender => {
 };
 
 const parseString = (text: any): string => {
-    if(!text || !isString(text)) {
+    if (!text || !isString(text)) {
         throw new Error(`Incorrect or missing field ${text}`);
     }
     return text;
@@ -31,9 +35,9 @@ const toNewPatient = (obj: any): newPatient => {
         ssn: parseString(obj.ssn),
         gender: parseGender(obj.gender),
         occupation: parseString(obj.occupation)
-    };
+      };
 
     return newEntry;
-}
+};
 
 export { toNewPatient };

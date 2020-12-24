@@ -23,8 +23,17 @@ router.post('/patients', (req, res) => {
     const addedPatient = patientService.addPatient(newPatient);
 
     res.json(addedPatient);
-  } catch (e) {
-    res.status(400).send(e.message);
+  } catch ({message}) {
+    res.status(400).send(message);
+  }
+});
+
+router.get('/patients/:id', (req, res) => {
+  try {
+    const patient = patientService.getPatient(req.params.id);
+    res.json(patient);
+  } catch ({message}) {
+    res.status(400).send(message);
   }
 });
 
