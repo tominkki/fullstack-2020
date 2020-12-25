@@ -1,8 +1,6 @@
 import { uuid } from 'uuidv4';
-import data from '../data/patients.json';
+import patients from '../data/patients';
 import { Patient, newPatient, PublicPatient } from '../types';
-
-const patients: Array<Patient> = data;
 
 const removeSSN = (patient: Patient): PublicPatient => {
     const { id, name, dateOfBirth, gender, occupation } = patient;
