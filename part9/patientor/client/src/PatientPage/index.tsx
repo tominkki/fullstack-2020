@@ -7,6 +7,7 @@ import { useStateValue, updatePatient } from '../state';
 import { apiBaseUrl } from '../constants';
 
 import { Icon } from 'semantic-ui-react';
+import EntryData from './Entry';
 
 const PatientPage: React.FC = () => {
 
@@ -44,7 +45,7 @@ const PatientPage: React.FC = () => {
     }
   }, []);
 
-  if (!patient) return null;
+  if (!patient || !patient.entries) return null;
 
   return (
     <div>
@@ -57,6 +58,12 @@ const PatientPage: React.FC = () => {
         <li>Born: {patient.dateOfBirth}</li>
         <li>Occupation: {patient.occupation}</li>
       </ul>
+      {patient.entries.length !== 0 ?
+        patient.entries.map(entry => 
+          <EntryData key={entry.id} entry={entry}/>
+          )
+        : null
+      }
     </div>
   );
 };
