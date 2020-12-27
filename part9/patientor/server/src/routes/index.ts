@@ -9,7 +9,7 @@ router.get('/ping', (_,res) => {
   res.send('pong');
 });
 
-router.get('/diagnoses', (_,res) => {
+router.get('/diagnosis', (_,res) => {
   res.json(diagnoseService.getDiagnoses());
 });
 

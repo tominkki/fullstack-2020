@@ -58,6 +58,7 @@ const PatientPage: React.FC = () => {
         <li>Born: {patient.dateOfBirth}</li>
         <li>Occupation: {patient.occupation}</li>
       </ul>
+      <h3>Entries:</h3>
       {patient.entries.length !== 0 ?
         patient.entries.map(entry => 
           <EntryData key={entry.id} entry={entry}/>
