@@ -1,10 +1,10 @@
 import { Diagnose } from './diagnose';
 
 export enum HealthCheckRating {
-  "Healthy" = 0,
-  "LowRisk" = 1,
-  "HighRisk" = 2,
-  "CriticalRisk" = 3
+  'Healthy' = 0,
+  'LowRisk' = 1,
+  'HighRisk' = 2,
+  'CriticalRisk' = 3
 }
 
 interface SickLeave {
@@ -17,7 +17,7 @@ interface Discharge {
   criteria: string;
 }
 
-interface BaseEntry {
+export interface BaseEntry {
   id: string;
   description: string;
   date: string;
@@ -41,7 +41,7 @@ interface HospitalEntry extends BaseEntry {
   discharge: Discharge;
 }
 
-export type Entry = 
+export type Entry =
   | HealthCheckEntry
   | OccupationalHealthCareEntry
   | HospitalEntry;

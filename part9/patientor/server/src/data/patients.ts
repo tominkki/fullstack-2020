@@ -1,6 +1,6 @@
 import { Patient, Gender } from '../types';
 
-const patients: Patient[] = [
+const patientData: Patient[] = [
   {
     id: 'd2773336-f723-11e9-8f0b-362b9e155667',
     name: 'John McClane',
@@ -14,15 +14,15 @@ const patients: Patient[] = [
         date: '2015-01-02',
         type: 'Hospital',
         specialist: 'MD House',
-        diagnosisCodes: ['S62.5'],
+        diagnosisCodes: [ 'S62.5' ],
         description:
-          "Healing time appr. 2 weeks. patient doesn't remember how he got the injury.",
+          'Healing time appr. 2 weeks. patient doesn\'t remember how he got the injury.',
         discharge: {
           date: '2015-01-16',
-          criteria: 'Thumb has healed.',
-        },
-      },
-    ],
+          criteria: 'Thumb has healed.'
+        }
+      }
+    ]
   },
   {
     id: 'd2773598-f723-11e9-8f0b-362b9e155667',
@@ -38,15 +38,15 @@ const patients: Patient[] = [
         type: 'OccupationalHealthcare',
         specialist: 'MD House',
         employerName: 'HyPD',
-        diagnosisCodes: ['Z57.1', 'Z74.3', 'M51.2'],
+        diagnosisCodes: [ 'Z57.1', 'Z74.3', 'M51.2' ],
         description:
           'Patient mistakenly found himself in a nuclear plant waste site without protection gear. Very minor radiation poisoning. ',
         sickLeave: {
           startDate: '2019-08-05',
-          endDate: '2019-08-28',
-        },
-      },
-    ],
+          endDate: '2019-08-28'
+        }
+      }
+    ]
   },
   {
     id: 'd27736ec-f723-11e9-8f0b-362b9e155667',
@@ -55,7 +55,7 @@ const patients: Patient[] = [
     ssn: '250470-555L',
     gender: Gender.Male,
     occupation: 'Technician',
-    entries: [],
+    entries: []
   },
   {
     id: 'd2773822-f723-11e9-8f0b-362b9e155667',
@@ -71,7 +71,7 @@ const patients: Patient[] = [
         specialist: 'MD House',
         type: 'HealthCheck',
         description: 'Yearly control visit. Cholesterol levels back to normal.',
-        healthCheckRating: 0,
+        healthCheckRating: 0
       },
       {
         id: 'fcd59fa6-c4b4-4fec-ac4d-df4fe1f85f62',
@@ -79,7 +79,7 @@ const patients: Patient[] = [
         specialist: 'MD House',
         type: 'OccupationalHealthcare',
         employerName: 'FBI',
-        description: 'Prescriptions renewed.',
+        description: 'Prescriptions renewed.'
       },
       {
         id: '37be178f-a432-4ba4-aac2-f86810e36a15',
@@ -88,9 +88,9 @@ const patients: Patient[] = [
         type: 'HealthCheck',
         description:
           'Yearly control visit. Due to high cholesterol levels recommended to eat more vegetables.',
-        healthCheckRating: 1,
-      },
-    ],
+        healthCheckRating: 1
+      }
+    ]
   },
   {
     id: 'd2773c6e-f723-11e9-8f0b-362b9e155667',
@@ -106,10 +106,10 @@ const patients: Patient[] = [
         specialist: 'Dr Byte House',
         type: 'HealthCheck',
         description: 'Digital overdose, very bytestatic. Otherwise healthy.',
-        healthCheckRating: 0,
-      },
-    ],
-  },
+        healthCheckRating: 0
+      }
+    ]
+  }
 ];
 
-export default patients;
+export default patientData;
