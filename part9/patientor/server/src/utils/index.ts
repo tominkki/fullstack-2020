@@ -1,3 +1,4 @@
+import { uuid } from 'uuidv4';
 import { newPatient, Gender, BaseEntry, Entry, Diagnose, HealthCheckRating } from '../types';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access*/
@@ -14,9 +15,9 @@ const isGender = (param: any): param is Gender => {
   return Object.values(Gender).includes(param);
 };
 
-const isHealthCheckRating = (param: any): param is HealthCheckRating => (
-  Object.values(HealthCheckRating).includes(param)
-);
+const isHealthCheckRating = (param: any): param is HealthCheckRating => {
+  return Object.values(HealthCheckRating).includes(param);
+};
 
 const parseString = (text: any): string => {
   if (!text || !isString(text)) {
@@ -33,7 +34,7 @@ const parseGender = (param: any): Gender => {
 };
 
 const parseHealthCheckRating = (param: any): HealthCheckRating => {
-  if (!param || !isHealthCheckRating(param)) {
+  if (param === undefined || !isHealthCheckRating(param)) {
     throw new Error(`Incorrect or missing field ${param}`);
   }
   return param;
@@ -61,7 +62,7 @@ const parseDiagnoseCodes = (arr: any): Array<Diagnose['code']> => {
 const toNewEntry = (obj: any): Entry => {
 
   const newEntry: BaseEntry = {
-    id: parseString(obj.id),
+    id: uuid(),
     description: parseString(obj.description),
     date: parseString(obj.date),
     specialist: parseString(obj.specialist),
